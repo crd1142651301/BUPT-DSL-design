@@ -1,0 +1,45 @@
+step startProc:
+    speak: $name + "你好，请问有什么可以帮你吗？"
+    listen 120 :
+        branch "投诉": complainProc
+        branch "年龄": ageProc
+        branch "余额": moneyProc
+        branch "再见": endProc
+        branch "等级": levelProc
+        branch "坤坤": kunkunProc
+        silence: silenceProc
+        default: defaultProc
+
+step complainProc:
+    speak: "请您将投诉信息告诉我们"
+    listen 120:
+        silence: silenceProc
+        default: startProc
+
+step ageProc:
+    speak: "你的年龄现在是" + $age + "岁。"
+    goto startProc
+
+step moneyProc:
+    speak: "你的余额现在是" + $money + "元。"
+    goto startProc
+
+step levelProc:
+    speak: "你的用户等级是" + $level
+    goto startProc
+
+step endProc:
+    speak: "感谢您的来电，再见"
+    exit
+
+step silenceProc:
+    speak: "请您将想说的信息告诉我们"
+    goto startProc
+
+step defaultProc:
+    speak: "对不起，我现在还听不懂你在说什么，请您换个语句问"
+    goto startProc
+
+step kunkunProc:
+    speak: "鸡你太美"
+    goto endProc

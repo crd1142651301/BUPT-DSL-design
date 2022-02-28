@@ -1,0 +1,42 @@
+step welcomeProc:
+    speak: $name + "你好，请问有什么可以帮您吗？"
+    listen 120 ：
+        branch "投诉": complainProc
+        branch "再见": thanksProc
+        branch "傻逼": fuckingProc
+        branch "查询": searchProc
+        branch "套餐": taocanProc
+        # 限定时间内未输入则跳转到这个状态
+        silence: silenceProc
+        # 输入的不在限定词之内，则去此状态
+        default: defaultProc
+
+step silenceProc:
+    speak: "请您说话提供给我们信息"
+    goto welcomeProc
+
+step complainProc:
+    speak: "请您将投诉信息告诉我们"
+    listen 120 :
+        silence: silenceProc
+        default: welcomeProc
+
+step thanksProc:
+    speak: "感谢您的来电，再见"
+    exit
+
+step fuckingProc:
+    speak: "你才是傻逼，我是你爹，爱问不问"
+    exit
+ 
+step searchProc:
+    speak: "你的余额为" + $money
+    goto welcomeProc
+
+step defaultProc:
+    speak: "抱歉，我现在好像还没有你问的这个功能[黄豆流汗]"
+    goto welcomeProc
+    
+step taocanProc:
+    speak: "您的套餐当前是1000包年服务"
+    goto welcomeProc

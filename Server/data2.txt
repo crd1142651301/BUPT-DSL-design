@@ -1,0 +1,5 @@
+number name age money level
+1      Bob  40  6000   8
+2      Mary 38  5000   7
+3      Jenny 17 4000   5
+4      Ben   15 3000   10
